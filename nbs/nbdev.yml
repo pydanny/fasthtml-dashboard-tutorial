@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "fasthtml-dashboard-tutorial"
+  site-url: "https://pydanny.github.io/fasthtml-dashboard-tutorial"
+  description: "FastHTML dashboard used for easy display of web components."
+  repo-branch: main
+  repo-url: "https://github.com/pydanny/fasthtml-dashboard-tutorial"
