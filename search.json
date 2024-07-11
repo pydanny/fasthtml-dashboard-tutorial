@@ -1,0 +1,112 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "fasthtml-dashboard-tutorial",
+    "section": "",
+    "text": "This file will become your README and also the index of your documentation.",
+    "crumbs": [
+      "fasthtml-dashboard-tutorial"
+    ]
+  },
+  {
+    "objectID": "index.html#install",
+    "href": "index.html#install",
+    "title": "fasthtml-dashboard-tutorial",
+    "section": "Install",
+    "text": "Install\npip install fasthtml_dashboard_tutorial",
+    "crumbs": [
+      "fasthtml-dashboard-tutorial"
+    ]
+  },
+  {
+    "objectID": "index.html#how-to-use",
+    "href": "index.html#how-to-use",
+    "title": "fasthtml-dashboard-tutorial",
+    "section": "How to use",
+    "text": "How to use\nFill me in please! Don’t forget code examples:\n\n1+1\n\n2\n\n\n\n55\n\n55",
+    "crumbs": [
+      "fasthtml-dashboard-tutorial"
+    ]
+  },
+  {
+    "objectID": "quickstart.html",
+    "href": "quickstart.html",
+    "title": "Quickstart",
+    "section": "",
+    "text": "pip install python-fasthtml",
+    "crumbs": [
+      "Quickstart"
+    ]
+  },
+  {
+    "objectID": "quickstart.html#installation",
+    "href": "quickstart.html#installation",
+    "title": "Quickstart",
+    "section": "",
+    "text": "pip install python-fasthtml",
+    "crumbs": [
+      "Quickstart"
+    ]
+  },
+  {
+    "objectID": "quickstart.html#a-minimal-application",
+    "href": "quickstart.html#a-minimal-application",
+    "title": "Quickstart",
+    "section": "A Minimal Application",
+    "text": "A Minimal Application\nA minimal FastHTML application looks something like this:\nfrom fasthtml.fastapp import * \n\napp, rt = fast_app(hdrs=(Script(src=\"https://cdn.plot.ly/plotly-2.32.0.min.js\"),))\n\n@app.get(\"/\")\ndef home():\n  return Titled(\"FastHTML\", P(\"Let's do this!\"), Div(id=\"myDiv\"),\n    Script(f\"var data = {chart.get('data', [])}; Plotly.newPlot('myDiv', data);\"))\n\nrun_uv()\nWhat does that code do?\n\nFirst we imported the FastHTML namespace on line 1. This is a carefully specified set of functions designed to optimize development.\nNext on line 3 we instantiate the FastHTML app with the fast_app() utility function. This provides a number of really useful defaults that we’ll take advantage of later in the tutorial.\nThen on line 5 we use the app.get() decorator to tell FastTML what URL should trigger our view function if visited with an HTTP GET. By HTTP GET we mean “go to that location in our browser”\nLine 6 is where we define our function name.\nOn line 7 we return several functions that describe all the HTML required to write a properly formed web page.\nFinally, on line 9 the run_uv() utility configures and runs FastHTML using a library called uvicorn.\n\nRun the code above by entering this command in the terminal:\npython main.py\nThe terminal should send out some text that looks like this:\nINFO:     Uvicorn running on http://0.0.0.0:5001 (Press CTRL+C to quit)\nINFO:     Started reloader process [58058] using WatchFiles\nINFO:     Started server process [58060]\nINFO:     Waiting for application startup.\nINFO:     Application startup complete.\nConfirm FastHTML is running by opening your web browser to this linl: 127.0.0.1:5001. You should see something like the image below:\nTODO add image\nWe did it! Now that we’ve got the program running, let’s view the source of the HTML page. It should look something like this:\n&lt;!DOCTYPE html&gt;\n\n&lt;html&gt;\n  &lt;head&gt;\n    &lt;title&gt;FastHTML&lt;/title&gt;\n    &lt;script src=\"https://unpkg.com/htmx.org@next/dist/htmx.min.js\"&gt;&lt;/script&gt;\n    &lt;script src=\"https://cdn.jsdelivr.net/gh/gnat/surreal/surreal.js\"&gt;&lt;/script&gt;\n    &lt;script src=\"https://cdn.jsdelivr.net/gh/gnat/css-scope-inline/script.js\"&gt;&lt;/script&gt;\n    &lt;link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@picocss/pico@latest/css/pico.min.css\"&gt;\n    &lt;style&gt;:root { --pico-font-size: 100%; }&lt;/style&gt;\n  &lt;/head&gt;\n  &lt;body&gt;\n&lt;main class=\"container\"&gt;\n  &lt;h1&gt;FastHTML&lt;/h1&gt;\n  &lt;p&gt;Let&#x27;s do this!!!&lt;/p&gt;\n&lt;/main&gt;\n  &lt;/body&gt;\n&lt;/html&gt;",
+    "crumbs": [
+      "Quickstart"
+    ]
+  },
+  {
+    "objectID": "quickstart.html#a-minimal-charting-application",
+    "href": "quickstart.html#a-minimal-charting-application",
+    "title": "Quickstart",
+    "section": "A Minimal Charting Application",
+    "text": "A Minimal Charting Application\nimport json\nfrom fasthtml.common import * \n\napp, rt = fast_app(hdrs=(Script(src=\"https://cdn.plot.ly/plotly-2.32.0.min.js\"),))\n\ndata = json.dumps({\n    \"data\": [\n            {\n            \"x\": [1, 2, 3, 4],\n            \"type\": \"scatter\"\n            },\n\n            {\n            \"x\": [1, 2, 3, 4],\n            \"y\": [16, 5, 11, 9],\n            \"type\": \"scatter\"\n            }\n        ],\n    \"title\": \"Plotly chart in FastHTML \",\n    \"description\": \"This is a demo dashboard\",\n    \"type\": \"scatter\"\n})\n\n\n@app.get(\"/\")\ndef home():\n  return Titled(\"FastHTML\", P(\"Let's do this!\"), Div(id=\"myDiv\"),\n    Script(f\"var data = {json.loads(data)}; Plotly.newPlot('myDiv', data);\"))\n\nrun_uv()",
+    "crumbs": [
+      "Quickstart"
+    ]
+  },
+  {
+    "objectID": "quickstart.html#routing",
+    "href": "quickstart.html#routing",
+    "title": "Quickstart",
+    "section": "Routing",
+    "text": "Routing\nFriendly URLs are intuitive and helpful to users, and easier to maintain for coders. Users are more likely to use your project if they can remember URLs without much effort. Fortunately, FastHTML uses the Python community’s common pattern for specifying URLs.\n\n\nmain.py\n\nfrom fasthtml.fastapp import * \n\napp, rt = fast_app()\n\n1@app.get(\"/\")\ndef home():\n  return Titled(\"FastHTML\", P(\"Let's do this!\"))\n\n2@app.get(\"/hello\")\ndef hello():\n  return Titled(\"Hello, world!\")\n\nrun_uv()\n\n\n1\n\nThe “/” URL on line 5 is the home of a project. This would be accessed at 127.0.0.1:5001.\n\n2\n\n“/hello” URL on line 9 will be found by the project if the user visits 127.0.0.1:5001/hello.\n\n\nYou can do more! Read on to learn what we can do to make parts of the URL dynamic.",
+    "crumbs": [
+      "Quickstart"
+    ]
+  },
+  {
+    "objectID": "quickstart.html#variable-in-urls",
+    "href": "quickstart.html#variable-in-urls",
+    "title": "Quickstart",
+    "section": "Variable in URLs",
+    "text": "Variable in URLs\nYou can add variable sections to a URL by marking sections with {variable_name}. Your function then receives the {variable_name} as a keyword argument, but only if it is the correct type. Here’s an example:\n\n\nmain.py\n\nfrom fasthtml.fastapp import * \n\napp, rt = fast_app()\n\n@app.get(\"/\")\ndef home():\n  return Titled(\"FastHTML\", P(\"Let's do this!\"))\n\n3@app.get(\"/{name}/{age}\")\n4def namer(name: str, age: int):\n5  return Titled(f\"Hello {name.title()}, age {age}\")\n\nrun_uv()\n\n\n3\n\nOn line 9 we specify two variable names, name and age\n\n4\n\nOn line 10 we define two function arguments named identically to the variables. You will note that we specify the Python types to be passed\n\n5\n\nOn line 11, we use these functions in our project\n\n\nTry it out by going to this address: 127.0.0.1:5001/uma/5. You should get a page that says,\n\n“Hello Uma, age 5”.\n\n\nWhat happens if we enter incorrect data?\nThe 127.0.0.1:5001/uma/5 URL works because 5 is an integer. If we enter something that is not, such as 127.0.0.1:5001/uma/five, then FastHTML will return an error instead of a web page.\n\n\n\n\n\n\nFastHTML URL routing supports more complex types\n\n\n\nThe two examples we provide here use Python’s built-in str and int types, but you can use your own types, including more complex ones such as those defined by libraries like attrs, pydantic, and even sqlmodel.",
+    "crumbs": [
+      "Quickstart"
+    ]
+  },
+  {
+    "objectID": "quickstart.html#http-methods",
+    "href": "quickstart.html#http-methods",
+    "title": "Quickstart",
+    "section": "HTTP Methods",
+    "text": "HTTP Methods\nMost commonly URL routes for web apps are defined as HTTP GET methods. However, form submissions often are sent as HTTP POST. When dealing with more dynamic web page designs, also known as Single Page Apps (SPA for short), the need can arise for other methods such as HTTP PUT and HTTP DELETE. The way FastHTML handles this is by changing the decorator.\n\n\nmain.py\n\nfrom fasthtml.fastapp import * \n\napp, rt = fast_app()\n\n6@app.get(\"/\")\ndef handle_get():\n  return Titled(\"HTTP GET\", P(\"Handle GET\"))\n\n7@app.post(\"/\")\ndef handle_post():\n  return Titled(\"HTTP POST\", P(\"Handle POST\"))\n\nrun_uv()\n\n\n6\n\nOn line 5 the app.get() decorator is used\n\n7\n\nOn line 10 the app.post() decorator is used",
+    "crumbs": [
+      "Quickstart"
+    ]
+  },
+  {
+    "objectID": "quickstart.html#static-files",
+    "href": "quickstart.html#static-files",
+    "title": "Quickstart",
+    "section": "Static Files",
+    "text": "Static Files\nIf you want to",
+    "crumbs": [
+      "Quickstart"
+    ]
+  }
+]

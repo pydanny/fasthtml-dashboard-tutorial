@@ -1,0 +1,1 @@
+Sitemap: https://pydanny.github.io/fasthtml-dashboard-tutorial/sitemap.xml
